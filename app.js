@@ -119,12 +119,12 @@ app.post("/todos/", async (request, response) => {
 app.put("/todos/:todoId/", async (request, response) => {
   const { todoId } = request.params;
   const todoDetails = request.body;
-  const { status, search_q, priority } = todoDetails;
-  let responsestring = null;
+  const { status, todo, priority } = todoDetails;
+  let responseString = "";
   let addQuery = null;
   switch (true) {
     case status !== undefined:
-      responsestring = "Status";
+      responseString = "Status";
       addQuery = `UPDATE
     todo
     SET 
@@ -134,7 +134,7 @@ app.put("/todos/:todoId/", async (request, response) => {
       break;
 
     case priority !== undefined:
-      responsestring = "Priority";
+      responseString = "Priority";
       addQuery = `UPDATE
     todo
     SET 
@@ -144,18 +144,17 @@ app.put("/todos/:todoId/", async (request, response) => {
       break;
 
     case todo !== undefined:
-      responsestring = "Todo";
+      responseString = "Todo";
       addQuery = `UPDATE
     todo
     SET
-    todo='${search_q}'
+    todo='${todo}'
      WHERE 
      id=${todoId};`;
       break;
   }
-
   await db.run(addQuery);
-  response.send(`${responsestring} Updated`);
+  response.send(`${responseString} Updated`);
 });
 
 app.delete("/todos/:todoId/", async (request, response) => {

@@ -10,17 +10,17 @@ GET http://localhost:3000/todos/?priority=HIGH&status=IN%20PROGRESS
 GET http://localhost:3000/todos/?search_q=Play
 
 ###
-GET http://localhost:3000/todos/2/
+GET http://localhost:3000/todos/11/
 
 ###
 POST http://localhost:3000/todos/
 Content-Type: application/json
 
 {
-  "id":6,
-  "todo": "Finaze play",
+  "id":11,
+  "todo": "Play",
   "priority": "HIGH",
-  "status": "IN PROGRESS"
+  "status": "TO DO"
 }
 
 ###
