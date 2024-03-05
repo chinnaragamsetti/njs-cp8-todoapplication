@@ -84,7 +84,7 @@ app.get("/todos/", async (request, response) => {
     FROM 
     todo
     WHERE 
-    todo='${search_q}';`;
+    todo LIKE '%${search_q}%';`;
   }
 
   responsedata = await db.all(gettodoQuery);
@@ -95,7 +95,7 @@ app.get("/todos/:todoId/", async (request, response) => {
   const { todoId } = request.params;
   const todoQuery = `SELECT * FROM todo
   WHERE id=${todoId};`;
-  const dbtodoQuery = await db.all(todoQuery);
+  const dbtodoQuery = await db.get(todoQuery);
   response.send(dbtodoQuery);
 });
 
